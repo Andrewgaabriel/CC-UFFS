@@ -1,0 +1,418 @@
+$date
+	Tue Sep 21 19:19:59 2021
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module testbench $end
+$var wire 16 ! resultado [15:0] $end
+$var wire 1 " pronto $end
+$var wire 1 # comecou $end
+$var reg 16 $ A [15:0] $end
+$var reg 16 % B [15:0] $end
+$var reg 16 & C [15:0] $end
+$var reg 8 ' X [7:0] $end
+$var reg 1 ( clk $end
+$var reg 1 ) inicio $end
+$var reg 1 * reset $end
+$scope module resolve $end
+$var wire 16 + A [15:0] $end
+$var wire 16 , B [15:0] $end
+$var wire 16 - C [15:0] $end
+$var wire 8 . X [7:0] $end
+$var wire 1 ( clk $end
+$var wire 1 ) inicio $end
+$var wire 1 * reset $end
+$var wire 16 / resultado [15:0] $end
+$var wire 1 " pronto $end
+$var wire 1 # comecou $end
+$var wire 2 0 M2 [1:0] $end
+$var wire 2 1 M1 [1:0] $end
+$var wire 2 2 M0 [1:0] $end
+$var wire 1 3 LX $end
+$var wire 1 4 LS $end
+$var wire 1 5 LH $end
+$var wire 1 6 H $end
+$scope module BC $end
+$var wire 1 ( clk $end
+$var wire 1 ) inicio $end
+$var wire 1 * reset $end
+$var wire 1 3 regLX $end
+$var wire 1 4 regLS $end
+$var wire 1 5 regLH $end
+$var wire 1 " pronto $end
+$var wire 1 # comecou $end
+$var wire 2 7 M2 [1:0] $end
+$var wire 2 8 M1 [1:0] $end
+$var wire 2 9 M0 [1:0] $end
+$var wire 1 6 H $end
+$var reg 4 : state [3:0] $end
+$upscope $end
+$scope module BO $end
+$var wire 16 ; A [15:0] $end
+$var wire 16 < B [15:0] $end
+$var wire 16 = C [15:0] $end
+$var wire 1 5 LH $end
+$var wire 1 4 LS $end
+$var wire 1 3 LX $end
+$var wire 2 > M0 [1:0] $end
+$var wire 2 ? M1 [1:0] $end
+$var wire 2 @ M2 [1:0] $end
+$var wire 8 A X [7:0] $end
+$var wire 1 ( clk $end
+$var wire 1 6 h $end
+$var wire 16 B op1_MuxM0 [15:0] $end
+$var wire 16 C resultado [15:0] $end
+$var wire 16 D saida_X16bits [15:0] $end
+$var wire 16 E saida_ULA [15:0] $end
+$var wire 16 F saida_MuxM2 [15:0] $end
+$var wire 16 G saida_MuxM1 [15:0] $end
+$var wire 16 H saida_MuxM0 [15:0] $end
+$var wire 16 I saida_LX [15:0] $end
+$var wire 16 J saida_LS [15:0] $end
+$var wire 16 K saida_LH [15:0] $end
+$scope module m0 $end
+$var wire 16 L dado1 [15:0] $end
+$var wire 16 M dado2 [15:0] $end
+$var wire 16 N dado3 [15:0] $end
+$var wire 16 O dado4 [15:0] $end
+$var wire 2 P sel [1:0] $end
+$var wire 16 Q saida [15:0] $end
+$upscope $end
+$scope module m1 $end
+$var wire 16 R dado1 [15:0] $end
+$var wire 16 S dado2 [15:0] $end
+$var wire 2 T sel [1:0] $end
+$var wire 16 U saida [15:0] $end
+$var wire 16 V dado4 [15:0] $end
+$var wire 16 W dado3 [15:0] $end
+$upscope $end
+$scope module m2 $end
+$var wire 16 X dado1 [15:0] $end
+$var wire 16 Y dado2 [15:0] $end
+$var wire 2 Z sel [1:0] $end
+$var wire 16 [ saida [15:0] $end
+$var wire 16 \ dado4 [15:0] $end
+$var wire 16 ] dado3 [15:0] $end
+$upscope $end
+$scope module reg_LH $end
+$var wire 1 ( clk $end
+$var wire 1 5 sel $end
+$var wire 16 ^ entrada [15:0] $end
+$var reg 16 _ saida [15:0] $end
+$upscope $end
+$scope module reg_LS $end
+$var wire 1 ( clk $end
+$var wire 1 4 sel $end
+$var wire 16 ` entrada [15:0] $end
+$var reg 16 a saida [15:0] $end
+$upscope $end
+$scope module reg_LX $end
+$var wire 1 ( clk $end
+$var wire 16 b entrada [15:0] $end
+$var wire 1 3 sel $end
+$var reg 16 c saida [15:0] $end
+$upscope $end
+$scope module ula0 $end
+$var wire 1 6 h $end
+$var wire 16 d m1 [15:0] $end
+$var wire 16 e m2 [15:0] $end
+$var wire 16 f out [15:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b10 f
+b10 e
+b0 d
+bx c
+b10 b
+bx a
+b10 `
+bx _
+b10 ^
+bx ]
+bx \
+b10 [
+b0 Z
+b0 Y
+b10 X
+bx W
+bx V
+b0 U
+b0 T
+b10 S
+b0 R
+b0 Q
+b0 P
+b101 O
+b10 N
+b1 M
+b0 L
+bx K
+bx J
+bx I
+b0 H
+b0 G
+b10 F
+b10 E
+b10 D
+bx C
+b0 B
+b10 A
+b0 @
+b0 ?
+b0 >
+b101 =
+b10 <
+b1 ;
+b0 :
+b0 9
+b0 8
+b0 7
+06
+05
+04
+03
+b0 2
+b0 1
+b0 0
+bx /
+b10 .
+b101 -
+b10 ,
+b1 +
+1*
+0)
+0(
+b10 '
+b101 &
+b10 %
+b1 $
+1#
+0"
+bx !
+$end
+#1
+b10 G
+b10 U
+b10 d
+b100 E
+b100 ^
+b100 `
+b100 f
+b1 1
+b1 8
+b1 ?
+b1 T
+13
+16
+0#
+b1 :
+1)
+0*
+1(
+#2
+0(
+#3
+03
+15
+b10 :
+b10 I
+b10 c
+1(
+#4
+0(
+#5
+b100 G
+b100 U
+b100 d
+b100 E
+b100 ^
+b100 `
+b100 f
+b1 F
+b1 [
+b1 e
+b1 H
+b1 Q
+b1 R
+b1 Y
+b11 1
+b11 8
+b11 ?
+b11 T
+b1 0
+b1 7
+b1 @
+b1 Z
+b1 2
+b1 9
+b1 >
+b1 P
+14
+05
+b11 :
+b100 K
+b100 V
+b100 \
+b100 _
+1(
+#6
+0(
+#7
+b10 G
+b10 U
+b10 d
+b10 F
+b10 [
+b10 e
+b10 H
+b10 Q
+b10 R
+b10 Y
+b0 1
+b0 8
+b0 ?
+b0 T
+b0 0
+b0 7
+b0 @
+b0 Z
+15
+b10 2
+b10 9
+b10 >
+b10 P
+04
+b100 :
+b100 !
+b100 /
+b100 C
+b100 J
+b100 W
+b100 ]
+b100 a
+1(
+#8
+0(
+#9
+b100 F
+b100 [
+b100 e
+b1000 E
+b1000 ^
+b1000 `
+b1000 f
+b100 G
+b100 U
+b100 d
+b11 1
+b11 8
+b11 ?
+b11 T
+b10 0
+b10 7
+b10 @
+b10 Z
+06
+b0 H
+b0 Q
+b0 R
+b0 Y
+05
+b0 2
+b0 9
+b0 >
+b0 P
+14
+b101 :
+1(
+#10
+0(
+#11
+b101 G
+b101 U
+b101 d
+b0 1
+b0 8
+b0 ?
+b0 T
+b101 H
+b101 Q
+b101 R
+b101 Y
+b11 2
+b11 9
+b11 >
+b11 P
+b1101 E
+b1101 ^
+b1101 `
+b1101 f
+b1000 F
+b1000 [
+b1000 e
+b110 :
+b1000 !
+b1000 /
+b1000 C
+b1000 J
+b1000 W
+b1000 ]
+b1000 a
+1(
+#12
+0(
+#13
+1"
+b0 G
+b0 U
+b0 d
+b0 0
+b0 7
+b0 @
+b0 Z
+b0 H
+b0 Q
+b0 R
+b0 Y
+b0 2
+b0 9
+b0 >
+b0 P
+04
+b10 E
+b10 ^
+b10 `
+b10 f
+b10 F
+b10 [
+b10 e
+b111 :
+b1101 !
+b1101 /
+b1101 C
+b1101 J
+b1101 W
+b1101 ]
+b1101 a
+1(
+#14
+0(
+#15
+0"
+b1000 :
+1(
+#16
+0(
+#17
+1#
+b0 :
+1(
