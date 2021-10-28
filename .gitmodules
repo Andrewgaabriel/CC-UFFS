@@ -22,3 +22,6 @@
 [submodule "2021.1 - Programação 1/list_02_prog1"]
 	path = 2021.1 - Programação 1/list_02_prog1
 	url = https://github.com/Andrewgaabriel/list_02_prog1.git
+[submodule "2021.1 - Programação 1/list_1_prog1"]
+	path = 2021.1 - Programação 1/list_1_prog1
+	url = https://github.com/Andrewgaabriel/list_1_prog1.git
