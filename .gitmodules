@@ -10,3 +10,6 @@
 [submodule "2021.1 - Programação 1/Jarena-Team-Groot-"]
 	path = 2021.1 - Programação 1/Jarena-Team-Groot-
 	url = https://github.com/larimones/Jarena-Team-Groot-.git
+[submodule "2021.1 - Programação 1/Davy-lang"]
+	path = 2021.1 - Programação 1/Davy-lang
+	url = https://github.com/danielpierrelus/Davy-lang.git
