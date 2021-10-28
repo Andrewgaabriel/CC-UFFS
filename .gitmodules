@@ -13,3 +13,9 @@
 [submodule "2021.1 - Programação 1/Davy-lang"]
 	path = 2021.1 - Programação 1/Davy-lang
 	url = https://github.com/danielpierrelus/Davy-lang.git
+[submodule "2021.1 - Programação 1/list_0_prog1"]
+	path = 2021.1 - Programação 1/list_0_prog1
+	url = https://github.com/Andrewgaabriel/list_0_prog1.git
+[submodule "2021.1 - Programação 1/list_01_prog1"]
+	path = 2021.1 - Programação 1/list_01_prog1
+	url = https://github.com/Andrewgaabriel/list_01_prog1.git
