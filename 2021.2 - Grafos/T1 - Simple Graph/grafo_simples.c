@@ -56,12 +56,53 @@ Vertex *insertVertex(Vertex *head, int value) {
     return new;
 }
 
+
+Edge *insertEdge(Graph *graph, int v_source, int v_destiny){
+    Vertex *auxV;
+    int s_flag = 0;
+    int d_flag = 0;
+
+    for(auxV = graph->vertexes; auxV != NULL; auxV = auxV->next) {
+        /*verify if v_source exist*/
+        if(auxV->value == v_source) {
+            s_flag = 1;
+        }
+    }
+
+    for(auxV = graph->vertexes; auxV != NULL; auxV = auxV->next) {
+        /*verify if v_destiny exist*/
+        if(auxV->value == v_destiny) {
+            d_flag = 1;
+        }
+    }
+    
+    if(s_flag == 1 && d_flag == 1){
+            Edge *new = malloc(sizeof(Edge));
+            new->source = v_source;
+            new->destiny = v_destiny;
+            new->next = graph->edges; // o primeiro vira o segundo;
+            return new; // o new vira o primeiro
+    } else {
+        if(s_flag == 0) {
+            printf("non-existent source value!!");
+        }
+        if(d_flag == 0) {
+            printf("non-existent destiny value!!");
+        } 
+        return NULL;
+        
+    }
+}
+    // Buescar a Origem e o Destino na lista de Vértices. 
+       //Devem ser os mesmo que estão na lista de vértices, não podem ser criados.
+
+
 /**
- * @brief function for print the graph;
+ * @brief function for print a non-oriented GRAPH;
  * 
  * @param graph 
  */
-void printGraph(Graph *graph) {
+void printNonOrientedGraph(Graph *graph) {
 
     Vertex *auxV;
     Edge *auxE;
@@ -84,12 +125,7 @@ void printGraph(Graph *graph) {
 
 }
 
-//nao orientado: 
-// -- listar todos os vertices com os respectivos graus;
 
-//orientado: 
-// -- listar os graus de entrada e saida para cada um dos vertices;
-// -- listar todos os vertices que sao sumidouros e fonte;
 
 Graph *newGraph(){
     Graph *new = malloc(sizeof(Graph));
@@ -100,15 +136,46 @@ Graph *newGraph(){
     return new;
 }
 
+
+
 int main(){
 
     Graph *g1 = newGraph();
 
     g1->vertexes = insertVertex(g1->vertexes, 1);
-    g1->vertexes = insertVertex(g1->vertexes, 1);
-    g1->vertexes = insertVertex(g1->vertexes, 1);
-    g1->vertexes = insertVertex(g1->vertexes, 1);
-    g1->vertexes = insertVertex(g1->vertexes, 1);
+    g1->vertexes = insertVertex(g1->vertexes, 2);
+    g1->vertexes = insertVertex(g1->vertexes, 3);
+    g1->vertexes = insertVertex(g1->vertexes, 4);
+    g1->vertexes = insertVertex(g1->vertexes, 5);
+
+    g1->edges = insertEdge(g1,5,1);
 
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+//nao orientado: 
+// -- listar todos os vertices com os respectivos graus;
+
+//orientado: 
+// -- listar os graus de entrada e saida para cada um dos vertices;
+// -- listar todos os vertices que sao sumidouros e fonte;
+
+
+
+
+
+
+
+
