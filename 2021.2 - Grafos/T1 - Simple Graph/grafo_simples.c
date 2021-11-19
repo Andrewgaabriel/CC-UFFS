@@ -60,12 +60,15 @@ Vertex *insertVertex(Vertex *head, int value) {
 Edge *insertEdge(Graph *graph, int v_source, int v_destiny){
     Vertex *auxV;
     int s_flag = 0;
+    Vertex *s_temp;
     int d_flag = 0;
+    Vertex *d_temp;
 
     for(auxV = graph->vertexes; auxV != NULL; auxV = auxV->next) {
         /*verify if v_source exist*/
         if(auxV->value == v_source) {
             s_flag = 1;
+            s_temp = auxV;
         }
     }
 
@@ -73,13 +76,14 @@ Edge *insertEdge(Graph *graph, int v_source, int v_destiny){
         /*verify if v_destiny exist*/
         if(auxV->value == v_destiny) {
             d_flag = 1;
+            d_temp = auxV;
         }
     }
     
     if(s_flag == 1 && d_flag == 1){
             Edge *new = malloc(sizeof(Edge));
-            new->source = v_source;
-            new->destiny = v_destiny;
+            new->source = s_temp;
+            new->destiny = d_temp;
             new->next = graph->edges; // o primeiro vira o segundo;
             return new; // o new vira o primeiro
     } else {
@@ -93,9 +97,21 @@ Edge *insertEdge(Graph *graph, int v_source, int v_destiny){
         
     }
 }
-    // Buescar a Origem e o Destino na lista de Vértices. 
-       //Devem ser os mesmo que estão na lista de vértices, não podem ser criados.
 
+int calculateG(Graph *graph, Vertex *auxV){
+    //auxV->value = vertice a ser achado o valor;
+    Edge *auxE;
+    int degree = 0;
+    for(auxE = graph->edges; auxE!=NULL; auxE = auxE->next) {
+        if (auxE->destiny->value == auxV->value) {
+            degree++;
+        }
+        if (auxE->source->value == auxV->value)[
+            degree++;
+        ]
+    }
+    return degree;   
+}
 
 /**
  * @brief function for print a non-oriented GRAPH;
@@ -109,7 +125,9 @@ void printNonOrientedGraph(Graph *graph) {
 
     printf("\n*********** Vertexes: ***********");
     for (auxV = graph->vertexes; auxV!=NULL; auxV=auxV->next) {
-        printf("\t %d,", auxV->value);
+        int g = calculateG(graph, auxV);
+        printf("\t Graph: %d - Degree: %d,", auxV->value, g);
+        
     }
 
 
@@ -123,13 +141,17 @@ void printNonOrientedGraph(Graph *graph) {
         }
     }
 
+
+
+
+
 }
 
 
 
 Graph *newGraph(){
     Graph *new = malloc(sizeof(Graph));
-    printf("\nOriented graph? (0 - non-oriented; 1 - oriented;)");
+    printf("\nOriented graph? (0 - no; 1 - yes;)");
     scanf("%d", new->oriented);
     new->edges = NULL;
     new->vertexes = NULL;
@@ -166,7 +188,7 @@ int main(){
 
 
 //nao orientado: 
-// -- listar todos os vertices com os respectivos graus;
+// -- listar todos os vertices com os respectivos graus; OK
 
 //orientado: 
 // -- listar os graus de entrada e saida para cada um dos vertices;
