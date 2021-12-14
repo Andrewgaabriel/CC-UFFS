@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My first JavaScript Test</title>
+    </head>
+    <body>
+        
+        
+
+        <button>Clique em mim!</button>
+        <script>
+            function criarParagrafo() {
+                let parag = document.createElement('p');
+                parag.textContent = 'Voce clicou no botão! ';
+                document.body.appendChild(parag);
+            }
+
+            const botoes = document.querySelectorAll('button');
+
+            for(var i = 0; i < botoes.length; i++) {
+                botoes[i].addEventListener('click', criarParagrafo);
+            }
+        </script>
+    </body>
+</html>
