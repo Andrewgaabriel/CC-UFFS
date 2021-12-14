@@ -5,7 +5,7 @@
 
 
 
-#define N 6
+#define N 7
 
 
 
@@ -33,9 +33,9 @@ void fillMat(int mat[][N], int n) {
  * @param mat 
  * @param n
  */
-void fillVec(int vet[N], int n) {
+void fillVec(int vet[N], int n, int value) {
     for(int j = 0 ;j< n; j++) {
-        vet[j] = 0;
+        vet[j] = value;
     }
 }
 
@@ -87,9 +87,9 @@ int isOriented(int mat[][N], int n) {
  */
 void printOrientedGraph(int mat[][N], int n) {
     int grauSaida[n];
-    fillVec(grauSaida, n);
+    fillVec(grauSaida, n,0);
     int grauEntrada[n];
-    fillVec(grauEntrada, n);
+    fillVec(grauEntrada, n,0);
 
 
     printf("ARESTAS: (origem,destino,valor)\n\n");
@@ -135,59 +135,118 @@ void printOrientedGraph(int mat[][N], int n) {
  */
 void printNonOrientedGraph(int mat[][N], int n) {
 
-    int grauSaida[n];
-    fillVec(grauSaida, n);
-    int grauEntrada[n];
-    fillVec(grauEntrada, n);
+    int grau[n];
+    fillVec(grau, n,0);
 
 
-    printf("ARESTAS:\n\n");
+
+    printf("ARESTAS: (origem,destino,valor)\n\n");
     //percorre as LINHAS;
     for(int i = 0; i < n; i++) {
         //percorre as COLUNAS
         for(int j = 0 ;j< n; j++) {
             if(mat[i][j]!=0){
-                grauSaida[i]++;
-                grauEntrada[j]++;
+                grau[i]++;
+
                 printf("( %d , %d , %d)\n", i,j, mat[i][j]);
 
             }
         }
     }
+
     printf("\nNODOS E RESPECTIVOS GRAUS\n\n");
     for(int c = 0; c < n; c++) {
-        printf("Nodo %d: Grau: %d \n", c+1, grauEntrada[c]+grauSaida[c]);
+        printf("Nodo %d: Grau: %d \n", c, grau[c]);
     }
 }
 
 
+void dijkstra(int mat[][N], int n, int verticeInicial) {
+
+    int vertice  = verticeInicial;
+    int jaVisitados[N];
+    int valorAcumulado[N];
+    int verticeAnterior[N];
+
+    fillVec(jaVisitados, n, 1);
+    fillVec(valorAcumulado, n, __INT_MAX__);
+    fillVec(verticeAnterior, n, -1);
+
+    /**
+     * ! IMPLEMENTAR FUNCIONAMENTO DO DIJKSTRA
+     *      * Percorrer a matriz de adjacência com um while e,
+     *      * ir preenchendo os vetores de dados do Dijkstra;
+     * 
+     */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
 
 int main(){
-
-    int matrizA[N][N] = {
-                                 {0,1,0,1,0,0}
-                                ,{1,0,0,0,1,0}
-                                ,{0,0,0,0,0,0}
-                                ,{1,0,0,0,0,0}
-                                ,{0,1,0,0,0,0}
-                                ,{0,0,0,0,0,0}
+    int verticeInicial;
+    int mat[N][N] = {
+                                 {0,7,0,5,0,0,0}
+                                ,{7,0,8,9,7,0,0}
+                                ,{0,8,0,0,5,0,0}
+                                ,{5,9,0,0,15,6,0}
+                                ,{0,7,5,15,0,8,9}
+                                ,{0,0,0,6,8,0,11}
+                                ,{0,0,0,0,9,11,0}
+                                
     };
 
     printf("\tMATRIX:\n\n");
 
-    printMat(matrizA, N);
+    printMat(mat, N);
 
     printf("\n");
 
 
 
 
-    if(isOriented(matrizA, N)){
-        printOrientedGraph(matrizA, N);
+    if(isOriented(mat, N)){
+        printOrientedGraph(mat, N);
 
     } else {
-        printNonOrientedGraph(matrizA, N);
+        printNonOrientedGraph(mat, N);
     }
+
+
+    printf(">>> Aplicando Dijkstra <<< \n - Defina o vertice inicial: \n");
+    scanf("%d", &verticeInicial);
+
+    dijkstra(mat, N, verticeInicial);
 
 
     return 0;
