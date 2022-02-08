@@ -132,7 +132,7 @@ void printVec(Fila *fila) {
 
 
 void bfs(int matD[][N], int matA[][N], Filfa *fila, int n) {
-
+lallala
 }
 
 
