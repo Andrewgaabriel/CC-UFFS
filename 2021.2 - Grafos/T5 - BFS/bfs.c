@@ -85,8 +85,8 @@ void printMatD(int matD[][N], int n) {
 typedef struct fila{
 
   int topo;
-  int c;
-  int value[N];
+  int cauda;
+  int value[1000];
 
 } Fila;
 
@@ -95,7 +95,7 @@ typedef struct fila{
 
 void initFila(Fila *f, int vertex) {
   f->topo = 0;
-  f->c = 1;
+  f->cauda = 0;
   for(int i = 0; i < N; i++) {
       f->value[i] = -1;
   }
@@ -105,18 +105,20 @@ void initFila(Fila *f, int vertex) {
 
 
 void addQ(Fila *f, int valor) {
-  f->value[f->c] = valor;
-  f->c++;
+  f->value[f->cauda] = valor;
+  f->cauda++;
 }
 
 
-
+void removeQ(Fila *f){
+    f->topo = f->topo+1
+}
 
 void initMatD(int matD[][N], int n) {
   for(int i = 0; i < n; i++) {
-    matD[0][i] = MAX;
-    matD[1][i] = 0;
-    matD[2][i] = 2;
+    matD[0][i] = MAX; // ==> distância
+    matD[1][i] = 0;   // ==> vertice anterior
+    matD[2][i] = 2;   // ==> cor: 0 > preto ||| 1 > cinza  ||| 2 > branco  
   }
 }
 
@@ -130,20 +132,92 @@ void printVec(Fila *fila) {
 }
 
 
+void printMatD(int matD[N][N], int n, int aVertex) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (matD[j][i] == MAX) {
+                printf("\tNON\t|");
+            }
+            else {
+                if (j == 2) {
+                    if(matD[j][i] == 0){
+                        printf("\tPreto\t|");
+                    }
+                    else if(matD[j][i] == 1){
+                        printf("\tCinza\t|");
+                    }
+                    else if(matD[j][i] == 2){
+                        printf("\tBranco\t|");
+                    }
+                }
+                else if(j == 1 && matD[j][i] == -1) {
+                    printf("\tnone\t|");
+                }
+                else {
+                    printf("\t%d\t|", matD[j][i]);
+                }
+            }
+        }
+        if(i == aVertex && aVertex > -1 && aVertex < n) {
+            printf(" <- visiting");
+        }
+        printf("\n");
+    }
+}
 
-void bfs(int matD[][N], int matA[][N], Filfa *fila, int n) {
-lallala
+
+void bfs(int matD[][N], int matA[][N], Fila *fila, int n, int fVertex, int dVertex) {
+
+    if (fVertex == dVertex) {
+        printf("Voce ja encontrou o vertice procurado!\n");
+        return;
+    }
+
+    int aVertex = fVertex;
+
+    while (aVertex < n) {
+        matD[2][aVertex] = 1; // torna-se cinza;
+
+        for (int i = 0; i < n; i++) {
+            if (matA[aVertex][i] != 0 && matD[2][i] == 0) { //se ele alcança outro e o outro for cinza ->
+                addQ(fila, i); // adiciona na fila
+                matD[2][i] = 1; // torna-se cinza
+                matD[0][i] = matD[0][aVertex] + 1; // setando distancia
+                matD[1][i] = aVertex; // setando vertice anterior
+            }
+            if (matA[aVertex][i] != 0 && i == dVertex) {
+                // ! PRINTA A MATRIZ DE DADOS
+                printMatD(matD, n);
+                printVec(fila);
+                // ! PRINTA A LISTA DE CORES
+                printf("\n\n >>> Chegamos no destino! ");
+
+                return;
+
+            }
+             if(fila->topo > fila->cauda) {
+                printf("\n\n Destino nao encontrado! \n"); 
+                return;
+             }
+        }
+        matD[2][aVertex] = 0; // torna-se preto
+
+        // ! PRINTA A MATRIZ DE DADOS
+        removeQ(fila);
+        printVec(fila);
+        // ! PRINTA A LISTA DE CORES
+        aVertex = fila->value[fila->topo]; // atualiza o vertice atual
+
+    }
 }
 
 
 
 
-int main()
-{
+int main() {
 
     Fila fila;
-    int matD[3][N]; //0-distancia; 1-vert.anterior; 2-color (0 is black, 1 is gray; 2 is white) ;
-
+    int matD[3][N]; 
     initMatD(matD, N);
   
     int mat[N][N] = {
@@ -160,43 +234,14 @@ int main()
 
 
     int fVertex;
-    printf("Digite o primeiro a vertice a ser visitado: ");
+    printf("Digite o vertice de origem: \n");
     scanf("%d", &fVertex);
     
-    initFila(&fila, fVertex);
-    addQ(&fila, 10);
-    printVec(&fila);
 
-    addQ(&fila, 5);
-    printVec(&fila);
+    printf("Digite o vertice de destino: \n");
+    scanf("%d", &dVertex);
 
-    addQ(&fila, 2);
-    printVec(&fila);
-    printMatD(matD, N);
-
-
-
-    
-
-
-
-
-
-
-
-    /*
-
-
-    printMatD(matD, N); -> função que imprime a matriz que armazena os dados
-    addQ(&fila, 10); -> função para adicionar elemento na fila de visitas
-    printVec(&fila); -> função que imprime a fila de visitas            
-    
-    
-    */
-    
-    
-
-
+    bfs(matD, mat, fila, N, fVertex, dVertex);
 
     return 0;
 } 
