@@ -186,7 +186,7 @@ void printColors(int matD[N][5]) {
  * @param fVertex -> first vertex
  * @param dVertex -> destiny
  */
-void dfs(int matD[N][5], int matA[N][N], Queue *queue, int n, int fVertex, int dVertex) {
+void dfs(int matD[N][5], int matA[N][N], Stack *stack, int n, int fVertex, int dVertex) {
 
     if (fVertex == dVertex) {
         printf("Voce ja encontrou o vertice procurado!\n");
@@ -194,47 +194,17 @@ void dfs(int matD[N][5], int matA[N][N], Queue *queue, int n, int fVertex, int d
     }
 
     int aVertex = fVertex; //vertice atual
+    int counter = 0; //timestamp para fazer a marcacao
 
+
+    
     while (aVertex < n) {
 
 
         printf("\n>>> Visitando o vertice %d <<<\n\n", aVertex+1);
 
 
-
-        for (int i = 0; i < n; i++) {
-            if (matA[aVertex][i] != 0 && matD[i][3] != 0) { //se ele alcança outro e o outro for branco;
-                addQ(queue, i);                      // adiciona na queue
-                matD[i][3] = 1;                     // torna-se cinza
-                matD[i][2] = aVertex;               // setando vertice anterior
-                matD[i][1] = matD[aVertex][i] + 1;  // setando a distancia
-                
-            }
-            if (matA[aVertex][i] != 0 && i == dVertex) {
-                printMatD(matD, n, aVertex);
-                printVec(queue);
-                printColors(matD);
-                printf("\n\n >>> Chegamos no vertice %d, o seu destino!\n\n ", i+1);
-
-                return;
-
-            }
-            if(queue->head > queue->tail) {
-                printf("\n\n Destino nao encontrado! \n"); 
-                return;
-             }
-        }
-        matD[aVertex][3] = 0; // torna-se preto
-
-        printMatD(matD, n, aVertex);
-        removeQ(queue);
-        printVec(queue);
-        printColors(matD);
-        if(queue->value[queue->head] == -1) {
-
-        }
-        aVertex = queue->value[queue->head]; // atualiza o vertice atual
-    }
+        
 }
 
 
@@ -265,7 +235,7 @@ int main() {
     
     initStack(stack, fVertex);
 
-    bfs(matD, mat, &queue, N, fVertex-1, dVertex-1);
+    dfs(matD, mat, &stack, N, fVertex-1, dVertex-1);
 
     return 0;
 } 
