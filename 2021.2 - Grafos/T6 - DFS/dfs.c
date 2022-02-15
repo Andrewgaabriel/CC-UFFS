@@ -6,7 +6,6 @@
 
 
 #define N 4
-#define MAX 2147483647
 
 
 /**
