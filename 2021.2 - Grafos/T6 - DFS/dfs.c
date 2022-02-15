@@ -196,6 +196,7 @@ void dfs(int matD[N][5], int matA[N][N], Stack *stack, int n, int fVertex, int d
 
     int aVertex = fVertex; //vertice atual
     int counter = 0; //timestamp para fazer a marcacao
+    int anterior = -1;
 
 
     
@@ -208,12 +209,16 @@ void dfs(int matD[N][5], int matA[N][N], Stack *stack, int n, int fVertex, int d
             matD[aVertex][1] = 1; // torna-se cinza;
             counter++;
             matD[aVertex][3] = counter;    
-            matD[aVertex][2] = -1;
+            matD[aVertex][2] = anterior;
         }
 
+
+
+        int next = 0; // false
         for (int i = 0; i < n; i++) {
             if (matA[aVertex][i] != 0 && matD[i][1] == 2) {
                 addS(stack, i);
+                next = 1; // true
                 break;
             }
             if (stack->value[stack->top] == dVertex) {
@@ -228,6 +233,17 @@ void dfs(int matD[N][5], int matA[N][N], Stack *stack, int n, int fVertex, int d
         printMatD(matD,n,aVertex);
         printStack(stack);
         printColors(matD);
+
+        if (next == 0) {
+            matD[aVertex][1] = 0; //torna - se preto
+            counter++;
+            matD[aVertex][4] = counter;
+            removeS(stack);
+        }
+
+        if (stack->top < 0) {
+            printf("\n>>> Impossivel encontrar seu destino <<<\n\n");
+        }
 
         aVertex = stack->value[stack->top];        
     }
@@ -244,9 +260,9 @@ int main() {
   
     int mat[N][N] = {               /* 1 2 3 4 */
                             /*1*/     {0,1,1,0}
-                            /*2*/    ,{0,0,0,1}
+                            /*2*/    ,{0,0,0,0}
                             /*3*/    ,{0,1,0,0}
-                            /*4*/    ,{0,0,1,0}
+                            /*4*/    ,{0,1,1,0}
             
                                 
     };
