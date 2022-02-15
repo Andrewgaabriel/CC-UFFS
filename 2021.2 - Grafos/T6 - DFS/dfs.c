@@ -182,7 +182,7 @@ void printColors(int matD[N][5]) {
  * 
  * @param matD -> data matrix
  * @param matA -> adjacency matrix
- * @param queue -> the queue
+ * @param Stack -> the Stack
  * @param n -> lenght of the matrix
  * @param fVertex -> first vertex
  * @param dVertex -> destiny
