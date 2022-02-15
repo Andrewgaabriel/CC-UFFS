@@ -66,12 +66,13 @@ void removeS(Stack *f){
  * @param Stack -> the Stack
  */
 void printStack(Stack *s) {
-    printf("\n");
-    for(int i = 0; i < N; i++) {
+    printf("\n Stack: ");
+    for(int i = s->top; i >= 0; i--) {
         printf("[%d],", s->value[i]+1);
         }
     printf("\n");
 }
+
 
 
 
@@ -102,7 +103,7 @@ void initMatD(int matD[N][5], int n) {
  */
 void printMatD(int matD[N][5], int n, int aVertex) {
 
-    printf("\tNOME\t|\COR.\t|\tV.ANT.\t|\tD\t|\tF\t|\t\n");
+    printf("\tNOME\t|\tCOR.\t|\tV.ANT.\t|\tD\t|\tF\t|\t\n");
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < 5; j++) {
 
@@ -216,7 +217,7 @@ void dfs(int matD[N][5], int matA[N][N], Stack *stack, int n, int fVertex, int d
                 break;
             }
             if (stack->value[stack->top] == dVertex) {
-                printMatD(matD,n,aVErtex);
+                printMatD(matD,n,aVertex);
                 printStack(stack);
                 printColors(matD);
                 printf("\n\n >>> Chegamos ao destino! <<< \n\n");
@@ -224,11 +225,12 @@ void dfs(int matD[N][5], int matA[N][N], Stack *stack, int n, int fVertex, int d
             }
         }
 
-        printMatD(matD,n,aVErtex);
+        printMatD(matD,n,aVertex);
         printStack(stack);
         printColors(matD);
 
         aVertex = stack->value[stack->top];        
+    }
 }
 
 
@@ -257,9 +259,9 @@ int main() {
     printf("Digite o vertice de destino: (1-%d)\n", N);
     scanf("%d", &dVertex);
     
-    initStack(stack, fVertex);
+    initStack(&stack, fVertex);
 
     dfs(matD, mat, &stack, N, fVertex-1, dVertex-1);
 
     return 0;
-} 
+}
