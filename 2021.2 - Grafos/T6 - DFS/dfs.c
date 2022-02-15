@@ -203,8 +203,32 @@ void dfs(int matD[N][5], int matA[N][N], Stack *stack, int n, int fVertex, int d
 
         printf("\n>>> Visitando o vertice %d <<<\n\n", aVertex+1);
 
+        if (matD[aVertex][1] == 2) {
+            matD[aVertex][1] = 1; // torna-se cinza;
+            counter++;
+            matD[aVertex][3] = counter;    
+            matD[aVertex][2] = -1;
+        }
 
-        
+        for (int i = 0; i < n; i++) {
+            if (matA[aVertex][i] != 0 && matD[i][1] == 2) {
+                addS(stack, i);
+                break;
+            }
+            if (stack->value[stack->top] == dVertex) {
+                printMatD(matD,n,aVErtex);
+                printStack(stack);
+                printColors(matD);
+                printf("\n\n >>> Chegamos ao destino! <<< \n\n");
+                return;
+            }
+        }
+
+        printMatD(matD,n,aVErtex);
+        printStack(stack);
+        printColors(matD);
+
+        aVertex = stack->value[stack->top];        
 }
 
 
