@@ -241,7 +241,7 @@ void kruskal(Edge *first, vDados *controle){
             auxD = controle->vet[auxD];
         }
 
-        printf("Visitando a aresta: (%d - %d - %d)\n\n", aux->origem, aux->peso, aux->destino);
+        printf("Visitando a aresta: (%d)- %d -(%d)\n\n", aux->origem, aux->peso, aux->destino);
 
         if (auxO != auxD)
         {
