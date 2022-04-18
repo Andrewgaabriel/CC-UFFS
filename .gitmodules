@@ -34,3 +34,6 @@
 [submodule "2021.2 - Organização de Computadores/pipeline"]
 	path = 2021.2 - Organização de Computadores/pipeline
 	url = https://github.com/Andrewgaabriel/pipeline.git
+[submodule "2021.2 - Engenharia de Software I/Projeto-integrador-Churros-Lorac"]
+	path = 2021.2 - Engenharia de Software I/Projeto-integrador-Churros-Lorac
+	url = https://github.com/Andrewgaabriel/Projeto-integrador-Churros-Lorac.git
