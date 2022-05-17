@@ -28,25 +28,25 @@ select d.name, avg(c.imdb_score) from contents c
 
 
 
-/* RETORNA TABELA COM DIRETOR + MEDIA
+/* RETORNA TABELA COM DIRETOR + MEDIA*/
 
 select d.name, avg(c.imdb_score) from contents c
     join content_directors cd on c.content_id=cd.content_id
     join directors d on d.director_id=cd.director_id
     group by d.name;
 
- */
+ 
 
  
 
 
 
 /* FUNÇÃO QUE INSERE OS DADOS DENTRO DA TABELA SCORE */
-/* INSERT INTO score(director_id, name, media) 
+INSERT INTO score(director_id, name, media) 
 SELECT d.director_id, d.name, avg(c.imdb_score) from contents c
     join content_directors cd on c.content_id=cd.content_id 
     join directors d on d.director_id=cd.director_id
-    group by d.name; */
+    group by d.director_id, d.name;
 
 
 /* FUNÇÃO QUE DESCOBRE O NOME DOS DIRETORES + ID DO DIRETO -  DO FILME PELO ID */
