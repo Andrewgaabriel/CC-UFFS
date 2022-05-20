@@ -65,7 +65,6 @@ void *thread1(void *data){
 
             printf("\nThread ID%ld failed to get mutex2.\n", pthread_self());
 
-
             pthread_mutex_unlock(&mutex2);
         }
 
@@ -107,7 +106,7 @@ void *thread2(void *data){
 
         //e se eu desbloquear o mutex2 antes de bloquear o mutex1?
 
-        if(pthread_mutex_lock(&mutex1)==0){
+        if(pthread_mutex_trylock(&mutex1)==0){
 
             flag1 = 2; //primeiro mutex foi acessado // DEU MUITO BOM
 
