@@ -1,0 +1,33 @@
+
+REVISÃO SQL - Andrew Gabriel Gomes
+
+
+1)
+select count(*) from actors a join content_actors c on c.actor_id=a.actor_id where content_id = 8;
+select name from actors a join content_actors c on c.actor_id=a.actor_id where content_id = 8;
+
+
+2)
+select title from contents where imdb_score > (select avg(imdb_score) from contents);
+
+
+
+3)
+select avg(imdb_score) from contents;
+
+
+
+4)
+select d.name, avg(c.imdb_score) as media from content_directors cd join directors d on cd.director_id=d.director_id join contents c on cd.content_id=c.content_id group by d.name order by media desc limit 3;
+
+
+5)
+select sub.title from (select title, content_rating from contents order by content_rating desc limit 10)sub order by sub.content_rating desc limit 3;
+
+6)
+select release_dates as ano from contents group by release_dates having count(release_dates) > 10; 
+
+
+
+
+
