@@ -33,77 +33,44 @@ void *thread1(void *data){
     unsigned long i,j;
 
     int flag = 0;
-    /* 
-        0 ->  deu ruim / nada foi feito
-        1 ->  primeiro mutex OK
-        2 ->  segundo mutex OK
-    */
-   
 
-    if (pthread_mutex_trylock(&mutex1) == 0) {
-        flag = 1; //primeiro mutex foi acessado
+    while (flag != 2) {
 
-        printf("Thread 1: mutex 1 foi acessado\n");
+        if (pthread_mutex_trylock(&mutex1) == 0) {
 
-        printf("Thread 1 - ID%ld got mutex1.\n", pthread_self());
+            printf("Thread 1: mutex 1 foi acessado (ID:%ld)\n",pthread_self());
 
-        for(i=0; i< 15000000; ++i); // just for wasting some time
+            for(i=0; i< 15000000; ++i); // just for wasting some time
 
+            if(pthread_mutex_trylock(&mutex2) == 0) {
+                
 
-        //e se eu desbloquear o mutex1 antes de bloquear o mutex2?
-        //pthread_mutex_unlock(&mutex1);
+                printf("Thread 1: mutex 2 foi acessado (ID:%ld)\n",pthread_self());
 
+                for(i=0; i< 10000000; ++i); // just for wasting some time
 
+                pthread_mutex_unlock(&mutex2);
 
+                printf("Thread 1: processo concluido, ambos mutexes foram acessados com sucesso! (ID:%ld)\n",pthread_self());
+                
+                flag = 2; 
 
+            } else {
 
-        if(pthread_mutex_trylock(&mutex2) == 0){
-            flag = 2; //segundo mutex foi acessado // DEU MUITO BOM
+                printf("Thread 1: mutex 2 nao foi acessado (ID:%ld)\n",pthread_self());
 
-            printf("Thread 1: mutex 2 foi acessado\n");
-
-            printf("Thread 1 - ID%ld got mutex2.\n", pthread_self());          
-
-            for(i=0; i< 10000000; ++i); // just for wasting some time
-
-            pthread_mutex_unlock(&mutex2);
-
-            // e se eu trocar o local de retorno / colocar aqui
-            printf("\nThread 1 - ID%ld got all mutexs with sucess.\n", pthread_self());
-
-            printf("Thread 1: processo concluido, ambos mutexes foram acessados com sucesso!\n");
-
-            pthread_exit(NULL);
+                pthread_mutex_unlock(&mutex2);
+            }
 
         } else {
 
-            flag = 0; //segundo mutex nao foi acessado / DEU RUIM
+            printf("Thread 1: mutex 1 nao foi acessado (ID:%ld)\n",pthread_self());
 
-            printf("Thread 1: mutex 2 nao foi acessado\n");
-
-            printf("\nThread 1 - ID%ld failed to get mutex2.\n", pthread_self());
-
-            pthread_mutex_unlock(&mutex2);
+            pthread_mutex_unlock(&mutex1);
         }
+   }
 
-        //pthread_mutex_unlock(&mutex1);
-    }
-    else {
-
-        flag = 0; //primeiro mutex nao foi acessado / DEU RUIM
-
-        printf("Thread 1: mutex 1 nao foi acessado\n");
-
-        printf("\nThread ID%ld failed to get mutex1.\n", pthread_self());
-
-        pthread_mutex_unlock(&mutex1);
-    }
-
-    /* if (flag == 2) {
-        printf("\nThread ID%ld got all mutexs with sucess.\n", pthread_self());
-        pthread_exit(NULL);
-    } */
-
+   pthread_exit(NULL);
 
 }
 
@@ -114,86 +81,47 @@ void *thread2(void *data){
     unsigned long i,j;
 
     int flag1 = 0;
-    /* 
-        0 ->  deu ruim / nada foi feito
-        1 ->  segundo mutex OK
-        2 ->  primeiro mutex OK
-    */
 
-    if(pthread_mutex_trylock(&mutex2) == 0){
+   while (flag1 != 2) {
 
-        flag1 = 1; //segundo mutex foi acessado
+        if(pthread_mutex_trylock(&mutex2) == 0){
 
-        printf("Thread 2: mutex 2 foi acessado\n");
+            printf("Thread 2: mutex 2 foi acessado (ID:%ld)\n", pthread_self());
 
-        printf("Thread 2 - ID%ld got mutex2.\n", pthread_self());
+            for(i=0; i< 10000000; ++i); // just for wasting some time
 
-        for(i=0; i< 10000000; ++i); // just for wasting some time
+            //e se eu desbloquear o mutex2 antes de bloquear o mutex1?
 
-        //e se eu desbloquear o mutex2 antes de bloquear o mutex1?
+            if(pthread_mutex_trylock(&mutex1)==0){
 
-        if(pthread_mutex_trylock(&mutex1)==0){
+                printf("Thread 2: mutex 1 foi acessado (ID:%ld)\n", pthread_self()); 
 
-            flag1 = 2; //primeiro mutex foi acessado // DEU MUITO BOM
+                for(i=0; i< 15000000; ++i); // just for wasting some time
 
-            printf("Thread 2: mutex 1 foi acessado\n");
+                pthread_mutex_unlock(&mutex1);   
 
-           printf("Thread 2 - ID%ld got mutex1.\n", pthread_self());  
+                printf("Thread 2: processo concluido, ambos mutexes foram acessados com sucesso! (ID:%ld)\n",pthread_self());
 
-           for(i=0; i< 15000000; ++i); // just for wasting some time
+                flag1 = 2;
 
-           pthread_mutex_unlock(&mutex1);   
+            } else {
 
-           // e se eu trocar o local de retorno / colocar aqui
-           printf("\nThread 2 - ID%ld got all mutexs with sucess.\n", pthread_self());
+                printf("Thread 2: mutex 1 nao foi acessado (ID:%ld)\n",pthread_self());
 
-            printf("Thread 2: processo concluido, ambos mutexes foram acessados com sucesso!\n");
+                pthread_mutex_unlock(&mutex1);
+            }
 
-           pthread_exit(NULL);
+            pthread_mutex_unlock(&mutex2);
+        } else {
 
+            printf("Thread 2: mutex 2 nao foi acessado (ID:%ld)\n",pthread_self());
+
+            pthread_mutex_unlock(&mutex2);
         }
-        else {
+   }
+   
+   pthread_exit(NULL);
 
-            flag1 = 0; //primeiro mutex nao foi acessado / DEU RUIM
-
-            printf("Thread 2: mutex 1 nao foi acessado\n");
-
-            printf("\nThread ID%ld did not get mutex1.\n", pthread_self());
-
-            pthread_mutex_unlock(&mutex1);
-        }
-
-        pthread_mutex_unlock(&mutex2);
-    }
-    else {
-
-        flag1 = 0; //segundo mutex nao foi acessado / DEU RUIM
-
-        printf("Thread 2: mutex 2 nao foi acessado\n");
-
-        printf("\nThread ID%ld did not get mutex2.\n", pthread_self());
-
-        pthread_mutex_unlock(&mutex2);
-    }
-
-
-
-    /* if(flag1 == 1){
-        printf("\nThread ID%ld got mutex2.\n", pthread_self());
-    }
-    else if(flag1 == 2){
-        printf("\nThread ID%ld got mutex1.\n", pthread_self());
-    }
-    else{
-        printf("\nThread ID%ld did not get mutex1 or mutex2.\n", pthread_self());
-    } */
-
-    /* if (flag1 == 2) {
-        printf("\nThread ID%ld got all mutexs with sucess.\n", pthread_self());
-        pthread_exit(NULL);
-    } */
-
-    
 }
 
 
