@@ -37,6 +37,4 @@
 [submodule "2021.2 - Engenharia de Software I/Projeto-integrador-Churros-Lorac"]
 	path = 2021.2 - Engenharia de Software I/Projeto-integrador-Churros-Lorac
 	url = https://github.com/Andrewgaabriel/Projeto-integrador-Churros-Lorac.git
-[submodule "log-redo"]
-	path = log-redo
-	url = git@github.com:Andrewgaabriel/log-redo.git
+
