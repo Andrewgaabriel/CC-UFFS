@@ -38,3 +38,6 @@
 	path = 2021.2 - Engenharia de Software I/Projeto-integrador-Churros-Lorac
 	url = https://github.com/Andrewgaabriel/Projeto-integrador-Churros-Lorac.git
 
+[submodule "2022.1 - Banco de dados 2/log-redo"]
+	path = 2022.1 - Banco de dados 2/log-redo
+	url = git@github.com:Andrewgaabriel/log-redo.git
