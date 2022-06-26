@@ -1,0 +1,32 @@
+Car*s,
+
+     uma dica referente ao trabalho com o xv6. A nova chamada de criação de processos (fork) deve contemplar a passagem do número de bilhetes (tickets) do processo. O fork é executado via chamada de sistema sys_fork(void), implementada no arquivo sysproc.c. A implementação original do sys_fork não recebe nenhum argumento e está da seguinte forma:
+
+int
+sys_fork(void)
+{
+return fork();
+}
+
+Para extrair um argumento passado para uma chamada de sistema, utiliza-se a função argint. Portanto, a extração do argumento passado na chamada de sys_fork seria implementada, por exemplo, da seguinte forma:
+
+int
+sys_fork(void)
+{
+int bilhetes;
+argint(0, &bilhetes); // aqui 0 referencia o primeiro argumento passado na chamada
+return fork(bilhetes);
+}
+
+Naturalmente que se torna necessário alterar fork (no arquivo fonte proc.c) para também receber um argumento inteiro.
+
+Deve-se atentar para alterar todas as chamadas que o próprio xv6 faz do fork, passando um número default de bilhetes, já que agora se espera que toda chamada de sys_fork receba um número de bilhetes.
+
+Atenciosamente,
+
+init 
+forktest
+sh
+stressfs
+
+Prof. Marco Aurélio Spohn
