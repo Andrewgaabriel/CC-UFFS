@@ -41,3 +41,6 @@
 [submodule "2022.1 - Banco de dados 2/log-redo"]
 	path = 2022.1 - Banco de dados 2/log-redo
 	url = git@github.com:Andrewgaabriel/log-redo.git
+[submodule "2022.1 - Sistemas Operacionais/xv6-lottery-scheduler-implementation"]
+	path = 2022.1 - Sistemas Operacionais/xv6-lottery-scheduler-implementation
+	url = git@github.com:Andrewgaabriel/xv6-lottery-scheduler-implementation.git
